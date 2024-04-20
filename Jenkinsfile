@@ -20,7 +20,7 @@ pipeline {
 		script {
 		    sh '''
 		    echo 'Build Docker Image'
-		    docker build -t ramprasadv7/flaskcal:${IMAGE_TAG} .
+		    docker build -t ramprasadv7/flask-cal:${IMAGE_TAG} .
 		    '''
 		}
 	    }
@@ -34,7 +34,7 @@ pipeline {
 	    steps {
 		script {
 		    withDockerRegistry([credentialsId: 'docker-cred', url: "https://index.docker.io/v1/"]) {
-			docker.image("ramprasadv7/flaskcal:${IMAGE_TAG}").push()
+			docker.image("ramprasadv7/flask-cal:${IMAGE_TAG}").push()
 		    }
 		}
 	    }
