@@ -10,7 +10,7 @@ pipeline {
 	    steps {
 	        git credentialsId: 'credentials',
 		url: 'https://github.com/Ramprasadvaral13/jenkins--ci-cd',
-		branc: 'main'
+		branch: 'main'
             }
 	}
 
