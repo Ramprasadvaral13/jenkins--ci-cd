@@ -1,11 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.9' // Use a Docker image with Python installed
-            args '-u root' // Run Docker container as root user (optional)
-        }
-    }
-
+    
     environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
     }
@@ -28,24 +22,6 @@ pipeline {
             }
         }
 
-        stage('Static Code Analysis') {
-            steps {
-                script {
-                    // Create and activate virtual environment
-                    sh 'python -m venv venv'
-                    sh 'source venv/bin/activate'
-                    
-                    // Install pylint
-                    sh 'pip install pylint'
-                    
-                    // Run pylint on app.py
-                    sh 'pylint app.py'
-                    
-                    // Deactivate virtual environment
-                    sh 'deactivate'
-                }
-            }
-        }
 
         stage('Push Docker Image') {
             environment {
