@@ -27,7 +27,7 @@ pipeline {
         stage('Run SonarQube Analysis') {
             steps {
                 script {
-                    withSonarQubeEnv('SonarQube') {
+                    withSonarQubeEnv('sonarqube') {
                         sh '''
                             sonar-scanner \
                             -Dsonar.projectKey=flask-calculator \
