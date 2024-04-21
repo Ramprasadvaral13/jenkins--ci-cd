@@ -27,14 +27,18 @@ pipeline {
 	}
 
 	stage('Static Code Analysis') {
-            steps {
-                // Install pylint (if not already installed)
-                sh 'pip install pylint'
-                
-                // Run pylint on your Python files
-                sh 'pylint app.py'
-            }
-        }
+    steps {
+        // Create and activate virtual environment
+        sh 'python -m venv venv'
+        sh 'source venv/bin/activate'
+
+        // Install pylint
+        sh 'pip install pylint'
+
+        // Run pylint
+        sh 'pylint your_module.py'
+    }
+}
 
 	stage('Push docker image') {
 	    environment {
