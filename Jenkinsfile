@@ -26,6 +26,15 @@ pipeline {
 	    }
 	}
 
+	stage('Static Code Analysis') {
+            steps {
+                // Install pylint (if not already installed)
+                sh 'pip install pylint'
+                
+                // Run pylint on your Python files
+                sh 'pylint app.py'
+            }
+        }
 
 	stage('Push docker image') {
 	    environment {
