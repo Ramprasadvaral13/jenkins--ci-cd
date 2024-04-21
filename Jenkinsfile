@@ -1,8 +1,9 @@
 pipeline {
     agent any
-    
+
     environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
+        SONAR_TOKEN = credentials('sonarqube')
     }
 
     stages {
@@ -23,6 +24,21 @@ pipeline {
             }
         }
 
+        stage('Run SonarQube Analysis') {
+            steps {
+                script {
+                    withSonarQubeEnv('SonarQube') {
+                        sh '''
+                            sonar-scanner \
+                            -Dsonar.projectKey=flask-calculator \
+                            -Dsonar.sources=. \
+                            -Dsonar.host.url=http://54.211.107.218:9000 \
+                            -Dsonar.login=${SONAR_TOKEN}
+                        '''
+                    }
+                }
+            }
+        }
 
         stage('Push Docker Image') {
             environment {
