@@ -25,20 +25,16 @@ pipeline {
 		}
 	    }
 	}
-
-	stage('Static Code Analysis') {
-    steps {
-        // Create and activate virtual environment
-        sh 'python -m venv venv'
-        sh 'source venv/bin/activate'
-
-        // Install pylint
-        sh 'pip install pylint'
-
-        // Run pylint
-        sh 'pylint your_module.py'
-    }
-}
+	
+	stage('static code analysis') {
+	     steps {
+		 sh 'python -m venv venv'
+		 sh 'source venv/bin/activate'
+		 sh 'pip install pylint'
+		 sh 'pylint your_module.py'
+	     }
+	}
+		
 
 	stage('Push docker image') {
 	    environment {
