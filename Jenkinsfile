@@ -31,7 +31,7 @@ pipeline {
 		 sh 'python -m venv venv'
 		 sh 'source venv/bin/activate'
 		 sh 'pip install pylint'
-		 sh 'pylint your_module.py'
+		 sh 'pylint app.py'
 	     }
 	}
 		
